@@ -13,6 +13,16 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+* {
+  transition-property: color, background-color, border-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 .my-masonry-grid {
   display: flex;
   margin-left: -16px;

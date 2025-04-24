@@ -1,32 +1,35 @@
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
+
 export default function Footer() {
-  const footerBg = 'bg-charcoal';
-  const textColor = 'text-grey-soft';
-  const linkColor = 'text-teal';
+  const footerBg = 'bg-charcoal dark:bg-navy-deep';
+  const textColor = 'text-grey-soft dark:text-grey-soft';
+  const linkColor = 'text-teal dark:text-teal';
+  const linkHoverColor = 'hover:text-coral dark:hover:text-coral';
+  const sidebarPadding = 'md:pl-20';
 
   return (
-    <footer className={`py-8 px-4 md:px-8 lg:px-16 ${footerBg} ${textColor} `}>
-      <div className="container mx-auto flex flex-col md:flex-row justify-between items-center text-sm">
-        <div className="flex gap-4 mb-4 md:mb-0">
+    <footer className={`py-6 px-8 ${footerBg} ${textColor} ${sidebarPadding}`}>
+      <div className="ml-4 flex flex-col md:flex-row justify-between items-center text-sm">
+        <div className="flex gap-6 mb-4 md:mb-0">
           <a
             href="https://github.com/Liam-McAuliffe/"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub Profile"
-            className={`${linkColor} hover:text-coral transition`}
+            className={`${linkColor} ${linkHoverColor} transition`}
           >
-            [GitHub Icon]
+            <FaGithub size={24} />
           </a>
           <a
             href="https://www.linkedin.com/in/liam-mcauliffe/"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn Profile"
-            className={`${linkColor} hover:text-coral transition`}
+            className={`${linkColor} ${linkHoverColor} transition`}
           >
-            [LinkedIn Icon]
+            <FaLinkedin size={24} />
           </a>
         </div>
-
         <div className="font-inter">
           © {new Date().getFullYear()} Liam McAuliffe
         </div>

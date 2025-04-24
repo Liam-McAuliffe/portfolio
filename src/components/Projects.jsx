@@ -1,4 +1,3 @@
-// src/components/Projects.js
 'use client';
 
 import Image from 'next/image';
@@ -22,7 +21,7 @@ export default function Projects({ projectsToDisplay }) {
   const textColor = 'text-charcoal dark:text-grey-soft';
   const headingColor = 'text-navy-deep dark:text-teal';
   const cardBg = 'bg-white/60 dark:bg-charcoal/60';
-  const cardText = 'text-grey-soft dark:text-grey-soft';
+  const cardText = 'text-charcoal dark:text-grey-soft';
   const cardBorder = 'border border-black/10 dark:border-white/20';
   const cardBackdropBlur = 'backdrop-blur-lg';
   const techPillBg = 'bg-navy-deep/80 dark:bg-navy-deep/90';
@@ -74,7 +73,7 @@ export default function Projects({ projectsToDisplay }) {
             <div
               key={project.id}
               onClick={() => handleOpenModal(project)}
-              className={`rounded-lg shadow-xl overflow-hidden mb-8 cursor-pointer {/* Add cursor-pointer */}
+              className={`rounded-lg shadow-xl overflow-hidden mb-8 cursor-pointer
                            ${cardBg} ${cardBorder} ${cardBackdropBlur} ${cardText}
                            transition duration-300 ease-in-out hover:scale-[1.03] hover:shadow-2xl`}
             >
@@ -131,10 +130,6 @@ export default function Projects({ projectsToDisplay }) {
             </div>
           ))}
         </Masonry>
-
-        <p className="mt-12 text-center text-sm text-teal italic">
-          (Project filtering added. Next: Dark Mode)
-        </p>
       </div>
 
       <AnimatePresence>

@@ -1,50 +1,45 @@
 'use client';
 
-import React, { useRef } from 'react';
+import React, { useRef, Suspense } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { OrbitControls, useTexture } from '@react-three/drei';
-import * as THREE from 'three';
+import { OrbitControls } from '@react-three/drei';
+import { useTheme } from '@/context/ThemeContext';
+import { Model } from './CustomModel';
 
-function SceneContent() {
+function SceneContent({ theme }) {
   const groupRef = useRef();
 
-  const maskTexture = useTexture('/earth-land-mask.png');
-
   useFrame((state, delta) => {
-    if (groupRef.current) {
-      groupRef.current.rotation.y += delta * 0.1;
+    if (groupRef.current && !state.controls?.enabled) {
+      groupRef.current.rotation.y += delta * 0.05;
     }
   });
 
-  const oceanColor = '#71cfe7';
-  const landColor = '#384e1d';
   const lightColor = '#F5F5F5';
+  const secondaryColor = '#FF6F61';
 
   return (
     <>
-      <ambientLight intensity={0.5} />
+      <ambientLight intensity={0.6} />
       <directionalLight
         position={[5, 5, 5]}
         intensity={1.5}
         color={lightColor}
       />
-      <group ref={groupRef} scale={1.4}>
-        <mesh scale={0.995}>
-          <sphereGeometry args={[1, 32, 32]} />
-
-          <meshToonMaterial color={landColor} />
-        </mesh>
-        <mesh>
-          <sphereGeometry args={[1, 32, 32]} />
-          <meshStandardMaterial
-            color={oceanColor}
-            map={maskTexture}
-            alphaMap={maskTexture}
-            transparent={true}
-            roughness={0.8}
-            metalness={0.1}
-          />
-        </mesh>
+      <directionalLight
+        position={[-3, -3, 2]}
+        intensity={0.4}
+        color={secondaryColor}
+      />
+      <group
+        ref={groupRef}
+        scale={1.0}
+        position={[0, 0, 0]}
+        rotation={[0, 0, 0]}
+      >
+        <Suspense fallback={null}>
+          <Model scale={1.0} />
+        </Suspense>
       </group>
       <OrbitControls
         enableZoom={false}
@@ -58,10 +53,14 @@ function SceneContent() {
 }
 
 export default function HeroAnimation() {
+  const { theme } = useTheme();
+  const darkBg = '#2b2b3a';
+  const lightBg = '#1e1e2f';
+
   return (
     <Canvas camera={{ position: [0, 0, 4], fov: 50 }} gl={{ antialias: true }}>
-      <color attach="background" args={[new THREE.Color('#1E1E2F')]} />
-      <SceneContent />
+      <color attach="background" args={[theme === 'dark' ? darkBg : lightBg]} />
+      <SceneContent theme={theme} />
     </Canvas>
   );
 }
