@@ -7,15 +7,9 @@ import { useState } from 'react';
 import ProjectModal from './ProjectModal';
 import { AnimatePresence } from 'framer-motion';
 
-// Accept projectsToDisplay prop
 export default function Projects({ projectsToDisplay }) {
-  // --- State for Modal ---
-  const [selectedProject, setSelectedProject] = useState(null); // null when closed, project object when open
-  // --- ---
+  const [selectedProject, setSelectedProject] = useState(null);
 
-  // const projects = [ ... ]; // <<< REMOVE this local definition
-
-  // --- Modal Handlers ---
   const handleOpenModal = (project) => {
     setSelectedProject(project);
   };
@@ -23,22 +17,19 @@ export default function Projects({ projectsToDisplay }) {
   const handleCloseModal = () => {
     setSelectedProject(null);
   };
-  // --- ---
 
-  // ... (keep breakpointColumnsObj and color definitions) ...
-  const sectionBg = 'bg-grey-soft';
-  const textColor = 'text-charcoal';
-  const headingColor = 'text-navy-deep';
-  const cardBg = 'bg-charcoal/60';
-  const cardText = 'text-grey-soft';
-  const cardBorder = 'border border-white/20';
+  const sectionBg = 'bg-grey-soft dark:bg-navy-deep';
+  const textColor = 'text-charcoal dark:text-grey-soft';
+  const headingColor = 'text-navy-deep dark:text-teal';
+  const cardBg = 'bg-white/60 dark:bg-charcoal/60';
+  const cardText = 'text-grey-soft dark:text-grey-soft';
+  const cardBorder = 'border border-black/10 dark:border-white/20';
   const cardBackdropBlur = 'backdrop-blur-lg';
-  const techPillBg = 'bg-navy-deep/80';
-  const techPillText = 'text-grey-soft';
+  const techPillBg = 'bg-navy-deep/80 dark:bg-navy-deep/90';
+  const techPillText = 'text-grey-soft dark:text-grey-soft';
 
   const breakpointColumnsObj = { default: 3, 1100: 2, 700: 1 };
 
-  // Handle case where no projects match filter
   if (!projectsToDisplay || projectsToDisplay.length === 0) {
     return (
       <section
@@ -63,7 +54,6 @@ export default function Projects({ projectsToDisplay }) {
   }
 
   return (
-    // Add relative positioning here if needed for absolute elements inside like modal? Usually not needed for fixed modal.
     <section
       id="projects"
       className={`py-16 px-4 md:px-8 lg:px-16 ${sectionBg} ${textColor}`}
@@ -80,20 +70,15 @@ export default function Projects({ projectsToDisplay }) {
           className="my-masonry-grid flex w-auto"
           columnClassName="my-masonry-grid_column bg-clip-padding px-4"
         >
-          {/* Map over the passed-in projectsToDisplay prop */}
           {projectsToDisplay.map((project, index) => (
             <div
               key={project.id}
-              // Make the card clickable to open the modal
               onClick={() => handleOpenModal(project)}
               className={`rounded-lg shadow-xl overflow-hidden mb-8 cursor-pointer {/* Add cursor-pointer */}
                            ${cardBg} ${cardBorder} ${cardBackdropBlur} ${cardText}
                            transition duration-300 ease-in-out hover:scale-[1.03] hover:shadow-2xl`}
             >
-              {/* Image Container */}
               <div className="relative h-48 w-full pointer-events-none">
-                {' '}
-                {/* Added pointer-events-none to image container */}
                 <Image
                   src={project.imageUrl}
                   alt={`Screenshot of ${project.title}`}
@@ -103,22 +88,16 @@ export default function Projects({ projectsToDisplay }) {
                   priority={index < 3}
                 />
               </div>
-              {/* Text Content Area */}
               <div className="p-6 pointer-events-none">
-                {' '}
-                {/* Added pointer-events-none */}
                 <h3
                   className={`font-montserrat font-bold text-xl mb-2 ${headingColor}`}
                 >
                   {project.title}
                 </h3>
                 <p className={`font-inter text-sm mb-4 ${cardText}`}>
-                  {project.description.split('\n')[0]}{' '}
-                  {/* Show only first line? */}
+                  {project.description.split('\n')[0]}
                 </p>
-                {/* Tech Stack Pills */}
                 <div className="flex flex-wrap gap-2 mb-4">
-                  {/* Render actual pills */}
                   {project.tech.map((tech) => (
                     <span
                       key={tech}
@@ -128,16 +107,13 @@ export default function Projects({ projectsToDisplay }) {
                     </span>
                   ))}
                 </div>
-                {/* Links - Keep these clickable */}
                 <div className="flex gap-4 pointer-events-auto">
-                  {' '}
-                  {/* Enable pointer events for links */}
                   <a
                     href={project.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    onClick={(e) => e.stopPropagation()} // Prevent card click when link is clicked
-                    className="text-teal hover:underline text-sm font-semibold"
+                    onClick={(e) => e.stopPropagation()}
+                    className="text-teal dark:text-teal hover:underline text-sm font-semibold"
                   >
                     Live Demo
                   </a>
@@ -145,8 +121,8 @@ export default function Projects({ projectsToDisplay }) {
                     href={project.repoUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    onClick={(e) => e.stopPropagation()} // Prevent card click when link is clicked
-                    className="text-coral hover:underline text-sm font-semibold"
+                    onClick={(e) => e.stopPropagation()}
+                    className="text-coral dark:text-coral hover:underline text-sm font-semibold"
                   >
                     GitHub Repo
                   </a>
@@ -161,13 +137,11 @@ export default function Projects({ projectsToDisplay }) {
         </p>
       </div>
 
-      {/* --- Wrap Modal in AnimatePresence --- */}
       <AnimatePresence>
         {selectedProject && (
           <ProjectModal project={selectedProject} onClose={handleCloseModal} />
         )}
       </AnimatePresence>
-      {/* --- --- */}
     </section>
   );
 }

@@ -4,14 +4,6 @@ export default function ContactForm() {
   const [statusMessage, setStatusMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const sectionBg = 'bg-white';
-  const textColor = 'text-charcoal';
-  const headingColor = 'text-navy-deep';
-  const labelColor = 'text-charcoal';
-
-  const buttonBg = 'bg-teal';
-  const buttonText = 'text-navy-deep';
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     setIsLoading(true);
@@ -50,12 +42,10 @@ export default function ContactForm() {
   return (
     <section
       id="contact"
-      className={`py-16 px-4 md:px-8 lg:px-16 ${sectionBg} ${textColor}`}
+      className="bg-white dark:bg-navy-deep py-16 px-4 md:px-8 lg:px-16"
     >
       <div className="container mx-auto max-w-xl">
-        <h2
-          className={`text-center font-montserrat text-3xl font-bold mb-12 ${headingColor}`}
-        >
+        <h2 className="text-navy-deep dark:text-teal text-center font-montserrat text-3xl font-bold mb-12">
           Get In Touch
         </h2>
 
@@ -63,7 +53,7 @@ export default function ContactForm() {
           <div>
             <label
               htmlFor="name"
-              className={`block text-sm font-inter font-medium mb-1 ${labelColor}`}
+              className={`block text-sm font-inter font-medium mb-1 text-charcoal dark:text-grey-soft`}
             >
               Name
             </label>
@@ -72,7 +62,7 @@ export default function ContactForm() {
               id="name"
               name="name"
               required
-              className={`w-full p-3 rounded <span class="math-inline">\{inputBg\} border border\-transparent focus\:outline\-none focus\:ring\-2 focus\:ring\-</span>{inputBorder} font-inter`}
+              className={`w-full p-3 rounded bg-grey-soft dark:bg-charcoal text-charcoal dark:text-grey-soft border border-transparent focus:outline-none focus:ring-2 focus:ring-transparent`}
               placeholder="Your Name"
               disabled={isLoading}
             />
@@ -81,7 +71,7 @@ export default function ContactForm() {
           <div>
             <label
               htmlFor="email"
-              className={`block text-sm font-inter font-medium mb-1 ${labelColor}`}
+              className={`block text-sm font-inter font-medium mb-1 text-charcoal dark:text-grey-soft`}
             >
               Email
             </label>
@@ -90,7 +80,7 @@ export default function ContactForm() {
               id="email"
               name="email"
               required
-              className={`w-full p-3 rounded <span class="math-inline">\{inputBg\} border border\-transparent focus\:outline\-none focus\:ring\-2 focus\:ring\-</span>{inputBorder} font-inter`}
+              className={`w-full p-3 rounded bg-grey-soft dark:bg-charcoal text-charcoal dark:text-grey-soft border border-transparent focus:outline-none focus:ring-2 focus:ring-transparent`}
               placeholder="your.email@example.com"
               disabled={isLoading}
             />
@@ -99,7 +89,7 @@ export default function ContactForm() {
           <div>
             <label
               htmlFor="message"
-              className={`block text-sm font-inter font-medium mb-1 ${labelColor}`}
+              className={`block text-sm font-inter font-medium mb-1 text-charcoal dark:text-grey-soft`}
             >
               Message
             </label>
@@ -108,7 +98,7 @@ export default function ContactForm() {
               name="message"
               required
               rows="4"
-              className={`w-full p-3 rounded <span class="math-inline">\{inputBg\} border border\-transparent focus\:outline\-none focus\:ring\-2 focus\:ring\-</span>{inputBorder} font-inter`}
+              className={`w-full p-3 rounded bg-grey-soft dark:bg-charcoal text-charcoal dark:text-grey-soft border border-transparent focus:outline-none focus:ring-2 focus:ring-transparent`}
               placeholder="Your message..."
               disabled={isLoading}
             ></textarea>
@@ -118,7 +108,7 @@ export default function ContactForm() {
             <button
               type="submit"
               disabled={isLoading}
-              className={`w-full rounded ${buttonBg} ${buttonText} px-6 py-3 font-montserrat font-bold transition hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed`}
+              className={`w-full rounded bg-teal dark:bg-teal text-navy-deep dark:text-navy-deep px-6 py-3 font-montserrat font-bold transition hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed`}
             >
               {isLoading ? 'Sending...' : 'Send Message'}
             </button>
@@ -126,8 +116,8 @@ export default function ContactForm() {
               <p
                 className={`mt-4 text-center text-sm ${
                   statusMessage.startsWith('Error')
-                    ? 'text-red-600'
-                    : 'text-green-600'
+                    ? 'text-red-600 dark:text-red-400'
+                    : 'text-green-600 dark:text-green-400'
                 }`}
               >
                 {statusMessage}

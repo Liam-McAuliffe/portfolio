@@ -19,30 +19,22 @@ export default function Community() {
     },
   ];
 
-  const sectionBg = 'bg-navy-deep';
-  const textColor = 'text-grey-soft';
-  const headingColor = 'text-teal';
-  const cardBg = 'bg-charcoal';
-  const iconColor = 'text-coral';
-
   return (
     <section
       id="community"
-      className={`py-16 px-4 md:px-8 lg:px-16 ${sectionBg} ${textColor}`}
+      className="bg-navy-deep dark:bg-charcoal text-grey-soft dark:text-grey-soft py-16 px-4 md:px-8 lg:px-16"
     >
       <div className="container mx-auto">
-        <h2
-          className={`text-center font-montserrat text-3xl font-bold mb-12 ${headingColor}`}
-        >
+        <h2 className="text-teal dark:text-teal text-center font-montserrat text-3xl font-bold mb-12">
           Community & Extracurriculars
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {activities.map((activity) => (
             <div
               key={activity.id}
-              className={`p-6 rounded-lg shadow-lg text-center ${cardBg}`}
+              className={`p-6 rounded-lg shadow-lg text-center bg-charcoal dark:bg-navy-deep`}
             >
-              <div className={`text-4xl mb-4 ${iconColor}`}>
+              <div className={`text-4xl mb-4 text-coral dark:text-coral`}>
                 {activity.iconPlaceholder}
               </div>
               <h3 className="font-montserrat font-bold text-xl mb-2">

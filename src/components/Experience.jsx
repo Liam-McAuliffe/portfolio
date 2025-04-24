@@ -21,15 +21,15 @@ export default function Experience() {
     },
   ];
 
-  const sectionBg = 'bg-white';
-  const textColor = 'text-charcoal';
-  const headingColor = 'text-navy-deep';
-  const cardBg = 'bg-charcoal';
-  const cardText = 'text-grey-soft';
-  const lineColor = 'bg-coral';
-  const dotColorWork = 'bg-coral';
+  const sectionBg = 'bg-white dark:bg-navy-deep';
+  const textColor = 'text-charcoal dark:text-grey-soft';
+  const headingColor = 'text-navy-deep dark:text-teal';
+  const cardBg = 'bg-charcoal dark:bg-charcoal';
+  const cardText = 'text-grey-soft dark:text-grey-soft';
+  const lineColor = 'bg-coral dark:bg-coral';
+  const dotColorWork = 'bg-coral dark:bg-coral';
   const dotColorEdu = 'bg-teal';
-  const dotBorder = 'border-navy-deep';
+  const dotBorder = 'border-navy-deep dark:border-grey-soft';
 
   const containerVariants = {
     hidden: { opacity: 0 },

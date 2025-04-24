@@ -4,7 +4,7 @@ export default function Footer() {
   const linkColor = 'text-teal';
 
   return (
-    <footer className={`py-8 px-4 md:px-8 lg:px-16 ${footerBg} ${textColor}`}>
+    <footer className={`py-8 px-4 md:px-8 lg:px-16 ${footerBg} ${textColor} `}>
       <div className="container mx-auto flex flex-col md:flex-row justify-between items-center text-sm">
         <div className="flex gap-4 mb-4 md:mb-0">
           <a

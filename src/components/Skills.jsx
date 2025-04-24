@@ -1,7 +1,5 @@
-// src/components/Skills.js
 'use client';
 
-// Pass down props: activeFilter, onFilterChange
 export default function Skills({ activeFilter, onFilterChange }) {
   const skills = {
     Frontend: ['HTML', 'CSS', 'JavaScript', 'React', 'Next.js', 'Tailwind CSS'],
@@ -13,16 +11,13 @@ export default function Skills({ activeFilter, onFilterChange }) {
   return (
     <section
       id="skills"
-      className={`py-16 px-4 md:px-8 lg:px-16 bg-navy-deep dark:bg-charcoal text-grey-soft dark:text-grey-soft`}
+      className="bg-navy-deep dark:bg-charcoal text-grey-soft dark:text-grey-soft py-16 px-4 md:px-8 lg:px-16"
     >
       <div className="container mx-auto text-center">
-        <h2
-          className={`font-montserrat text-3xl font-bold mb-12 text-teal dark:text-teal`}
-        >
+        <h2 className="text-teal dark:text-teal font-montserrat text-3xl font-bold mb-12">
           My Tech Stack
         </h2>
 
-        {/* "All" Button */}
         <button
           onClick={() => onFilterChange('All')}
           className={`rounded-full px-4 py-2 text-sm font-inter shadow-md m-2 transition-colors duration-200
@@ -35,13 +30,10 @@ export default function Skills({ activeFilter, onFilterChange }) {
           All
         </button>
 
-        {/* Skill Categories and Pills */}
         <div className="flex flex-wrap justify-center gap-x-8 gap-y-4 mt-6">
           {Object.entries(skills).map(([category, items]) => (
             <div key={category} className="mb-2">
-              <h3
-                className={`font-montserrat text-xl font-bold mb-3 text-coral dark:text-coral`}
-              >
+              <h3 className="text-coral dark:text-coral font-montserrat text-xl font-bold mb-3">
                 {category}
               </h3>
               <div className="flex flex-wrap justify-center gap-3">

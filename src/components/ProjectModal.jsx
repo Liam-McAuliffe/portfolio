@@ -28,11 +28,11 @@ export default function ProjectModal({ project, onClose }) {
       transition: { duration: 0.2, ease: 'easeIn' },
     },
   };
-  const overlayBg = 'bg-black/70';
-  const modalBg = 'bg-charcoal';
-  const textColor = 'text-grey-soft';
+  const overlayBg = 'bg-black/70 dark:bg-black/80';
+  const modalBg = 'bg-white dark:bg-charcoal';
+  const textColor = 'text-charcoal dark:text-grey-soft';
   const closeButtonHover = 'hover:text-coral';
-  const headingColor = 'text-teal';
+  const headingColor = 'text-navy-deep dark:text-teal';
 
   return (
     <motion.div
@@ -87,7 +87,7 @@ export default function ProjectModal({ project, onClose }) {
           {project.tech.map((tech) => (
             <span
               key={tech}
-              className={`rounded-full bg-navy-deep/80 text-grey-soft px-3 py-1 text-xs font-inter`}
+              className={`rounded-full bg-navy-deep/80 dark:bg-navy-deep text-grey-soft dark:text-grey-soft px-3 py-1 text-xs font-inter`}
             >
               {tech}
             </span>
@@ -98,7 +98,7 @@ export default function ProjectModal({ project, onClose }) {
             href={project.liveUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-teal hover:underline text-sm font-semibold"
+            className="text-teal dark:text-teal hover:underline text-sm font-semibold"
           >
             Live Demo
           </a>
@@ -106,7 +106,7 @@ export default function ProjectModal({ project, onClose }) {
             href={project.repoUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-coral hover:underline text-sm font-semibold"
+            className="text-coral dark:text-coral hover:underline text-sm font-semibold"
           >
             GitHub Repo
           </a>

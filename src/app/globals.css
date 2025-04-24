@@ -13,19 +13,17 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* Masonry CSS */
 .my-masonry-grid {
   display: flex;
-  margin-left: -16px; /* Adjust if your column padding (px-4) changes, should be negative padding */
+  margin-left: -16px;
   width: auto;
 }
 
 .my-masonry-grid_column {
-  padding-left: 16px; /* Adjust if your column padding (px-4) changes */
-  background-clip: padding-box; /* Prevent background from extending into padding */
+  padding-left: 16px;
+  background-clip: padding-box;
 }
 
-/* Ensure direct children of column have vertical margin */
 .my-masonry-grid_column > div {
-  margin-bottom: 16px; /* Or match your desired vertical gap, e.g., mb-8 used in card */
+  margin-bottom: 16px;
 }
