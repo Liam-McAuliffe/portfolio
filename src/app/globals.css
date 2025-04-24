@@ -1,26 +1,31 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-navy-deep: #1e1e2f; /* Primary */
+  --color-charcoal: #2b2b3a; /* Neutral */
+  --color-grey-soft: #f5f5f5; /* Neutral */
+  --color-teal: #4dd0e1; /* Accent */
+  --color-coral: #ff6f61; /* Accent */
+
+  --font-montserrat: Montserrat, sans-serif;
+  --font-inter: Inter, sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Masonry CSS */
+.my-masonry-grid {
+  display: flex;
+  margin-left: -16px; /* Adjust if your column padding (px-4) changes, should be negative padding */
+  width: auto;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.my-masonry-grid_column {
+  padding-left: 16px; /* Adjust if your column padding (px-4) changes */
+  background-clip: padding-box; /* Prevent background from extending into padding */
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Ensure direct children of column have vertical margin */
+.my-masonry-grid_column > div {
+  margin-bottom: 16px; /* Or match your desired vertical gap, e.g., mb-8 used in card */
 }

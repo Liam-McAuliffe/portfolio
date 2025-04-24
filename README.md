@@ -1,36 +1,88 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Portfolio Site Design Plan
 
-## Getting Started
+## 1. Overall Aesthetic & Branding
 
-First, run the development server:
+- **Color Palette**
+  - **Primary:** Deep navy `#1E1E2F`
+  - **Accent:** Teal `#4DD0E1` and coral `#FF6F61`
+  - **Neutrals:** Soft grey `#F5F5F5` and charcoal `#2B2B3A`
+- **Typography**
+  - **Headings:** Montserrat, bold, tight letter-spacing
+  - **Body:** Inter, normal weight
+- **Visual Motif**
+  - Diagonal section separators
+  - Glass-morphism cards (semi-transparent backdrop-filter with subtle inner glow)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 2. Layout & Structure
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+1. **Hero / Landing**
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+   - Full-viewport split layout:
+     - **Left:** “Hi, I’m Liam McAuliffe” + subtitle “Full-Stack Developer”
+     - **Right:** Animated code-snippet background or floating SVG nodes
+   - Primary CTA button: “View Projects”
 
-## Learn More
+2. **Sticky Sidebar Nav** (desktop)
 
-To learn more about Next.js, take a look at the following resources:
+   - Vertical icon + label list: Home, About, Skills, Experience, Projects, Contact
+   - Collapses to a top hamburger on mobile
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. **About Me**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+   - Two-column: circular headshot with drop-shadow + narrative text
+   - Highlight “Science 4 Kids” & tutoring with icons
 
-## Deploy on Vercel
+4. **Skills**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+   - Interactive tag cloud/pills to filter projects dynamically
+   - On hover, display proficiency tooltip
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+5. **Experience**
+
+   - Horizontal interactive timeline (Framer Motion) with each milestone animating into view
+
+6. **Projects**
+
+   - Masonry grid of glass-cards:
+     - Screenshot with hover tilt+glow, title, tech-stack badges
+     - Click expands to full-screen modal with case-study details
+
+7. **Community & Extracurriculars**
+
+   - Icon-driven grid linking to deeper narratives on tutoring & outreach
+
+8. **Contact**
+
+   - Clean form with floating labels, validation states, and micro-animation
+   - Dark/light-mode toggle
+
+9. **Footer**
+   - Social icons (GitHub, LinkedIn), “© 2025 Liam McAuliffe”
+
+---
+
+## 3. Micro-Interactions & Performance
+
+- **Scroll-Triggered Animations:** Fade/slide sections into view
+- **Hover States:** Buttons scale (`hover:scale-105`), cards elevate (`hover:shadow-lg`)
+- **Dark/Light Mode:** Toggle swaps semantic Tailwind classes (`dark:bg-gray-900`, `bg-white`)
+- **Image Optimization:** `next/image` for headshot & project screenshots
+
+---
+
+## 4. Responsiveness & Accessibility
+
+- **Mobile-First Design:** Single-column stack on small screens, no horizontal scroll
+- **WCAG Best Practices:**
+  - Semantic HTML5 (`<nav>`, `<main>`, `<article>`, `<footer>`)
+  - Descriptive `alt` text for images
+  - Keyboard-navigable interactive elements with visible focus rings
+  - Contrast ratios ≥ 4.5:1 for text
+
+---
+
+## 5. Unique “Signature” Feature
+
+Embed a live mini-demo (e.g., a tiny React component) directly in the Hero or Projects section via an `<iframe>` or sandboxed React snippet.
