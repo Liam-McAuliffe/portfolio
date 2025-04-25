@@ -1,7 +1,7 @@
 import React from 'react';
 import { useGLTF } from '@react-three/drei';
 
-export function Model(props) {
+export function EarthModel(props) {
   const { nodes, materials } = useGLTF('/low_poly_earth.glb');
 
   return (

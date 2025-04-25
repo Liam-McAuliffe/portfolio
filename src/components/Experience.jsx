@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useRef } from 'react';
 
 export default function Experience() {
@@ -9,134 +9,133 @@ export default function Experience() {
       id: 1,
       title: 'Role at SONIC',
       type: 'Work',
-      description: 'Crewmate/Carhop: customer service & teamwork.',
+      description:
+        'Crewmate/Carhop: Customer service experience and teamwork in a fast-paced environment.',
+      date: '2022',
     },
     {
       id: 2,
-      title: 'Eastside High School IB program',
+      title: 'Eastside High School',
       type: 'Education',
-      description: 'International Baccalaureate Diploma: 3.8 GPA',
+      description:
+        'Graduated with from the International Baccalaureate (IB) program (3.8 GPA).',
+      date: '2020-2024',
     },
     {
       id: 3,
-      title: 'University of South Florida (USF)',
+      title: 'University of South Florida',
       type: 'Education',
-      description: 'Computer Science: 3.2 GPA',
+      description: 'Pursuing B.S. in Computer Science. (Current GPA: 3.2)',
+      date: '2024-Present',
     },
   ];
-
-  const targetRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: targetRef,
-    offset: ['start end', 'end start'],
-  });
 
   const sectionBg = 'bg-white dark:bg-navy-deep';
   const textColor = 'text-charcoal dark:text-grey-soft';
   const headingColor = 'text-navy-deep dark:text-teal';
-  const cardBg = 'bg-charcoal dark:bg-navy-deep';
-  const cardText = 'text-grey-soft dark:text-grey-soft';
-  const lineColor = 'bg-coral dark:bg-coral';
+  const cardBg = 'bg-grey-soft dark:bg-charcoal';
+  const cardText = 'text-charcoal dark:text-grey-soft';
+  const cardBorder = 'border-l-4 md:border-l-0 md:border-r-4';
+  const cardBorderWork = 'border-coral dark:border-coral';
+  const cardBorderEdu = 'border-teal dark:border-teal';
+  const lineColor = 'bg-grey-soft/50 dark:bg-grey-soft/30';
+  const dotBg = 'bg-white dark:bg-navy-deep';
+  const dotRingWork = 'ring-coral dark:ring-coral';
+  const dotRingEdu = 'ring-teal dark:ring-teal';
   const dotColorWork = 'bg-coral dark:bg-coral';
   const dotColorEdu = 'bg-teal dark:bg-teal';
-  const dotBorder = 'border-navy-deep dark:border-grey-soft';
 
-  const lineScaleX = useTransform(scrollYProgress, [0.1, 0.7], [0, 1]);
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.3, delayChildren: 0.1 },
+    },
+  };
+
+  const itemVariants = {
+    left: {
+      hidden: { opacity: 0, x: -50 },
+      visible: {
+        opacity: 1,
+        x: 0,
+        transition: { duration: 0.5, ease: 'easeOut' },
+      },
+    },
+    right: {
+      hidden: { opacity: 0, x: 50 },
+      visible: {
+        opacity: 1,
+        x: 0,
+        transition: { duration: 0.5, ease: 'easeOut' },
+      },
+    },
+  };
 
   return (
     <section
-      ref={targetRef}
       id="experience"
-      className={`relative py-16 px-4 md:px-8 lg:px-16 overflow-hidden ${sectionBg} ${textColor}`}
+      className={`relative ${sectionBg} ${textColor} py-20 px-4 md:px-8 lg:px-16 overflow-hidden`}
     >
-      <div className="container mx-auto relative">
+      <div className="container mx-auto max-w-3xl relative">
         <h2
-          className={`text-center font-montserrat text-3xl font-bold mb-16 md:mb-24 ${headingColor}`}
+          className={`text-center font-montserrat text-3xl md:text-4xl font-bold mb-16 md:mb-20 ${headingColor}`}
         >
-          Experience & Education
+          My Journey
         </h2>
+        <div
+          className={`absolute top-12 bottom-0 left-1/2 w-1 ${lineColor} -translate-x-1/2 hidden md:block`}
+        ></div>
+        <motion.div
+          className="space-y-16"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+        >
+          {milestones.map((item, index) => {
+            const isLeft = index % 2 === 0;
+            const borderColorClass =
+              item.type === 'Work' ? cardBorderWork : cardBorderEdu;
 
-        <div className="hidden md:block relative w-full px-4 py-8">
-          <motion.div
-            className={`absolute top-1/2 left-0 h-1 w-full ${lineColor} -translate-y-1/2 origin-left`}
-            style={{ scaleX: lineScaleX }}
-          />
-
-          <div className="relative flex w-full justify-between items-start">
-            {milestones.map((item, index) => {
-              const start = 0.1 + index * 0.1;
-              const end = 0.4 + index * 0.1;
-              const opacity = useTransform(
-                scrollYProgress,
-                [start, end],
-                [0, 1]
-              );
-              const scale = useTransform(
-                scrollYProgress,
-                [start, end],
-                [0.8, 1]
-              );
-              const y = useTransform(scrollYProgress, [start, end], [50, 0]);
-
-              return (
-                <div
-                  key={item.id}
-                  className="relative z-10 flex flex-col items-center px-2"
-                >
-                  <motion.div
-                    className={`h-5 w-5 rounded-full ${item.type === 'Work' ? dotColorWork : dotColorEdu} border-4 ${dotBorder} mb-4 shadow-sm`}
-                    style={{ opacity: opacity }}
-                  ></motion.div>
-
-                  <motion.div
-                    className={`p-4 rounded shadow-lg w-48 text-center ${cardBg} ${cardText}`}
-                    style={{ opacity, scale, y }}
-                  >
-                    <h3 className="font-montserrat font-bold text-md mb-1">
-                      {item.title}
-                    </h3>
-                    <p className="font-inter text-xs italic mb-2">
-                      ({item.type})
-                    </p>
-                    <p className="font-inter text-xs">{item.description}</p>
-                  </motion.div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        <div className="relative block md:hidden mt-10 max-w-sm mx-auto">
-          <div
-            className={`absolute top-2 bottom-2 left-2 w-1 ${lineColor} -translate-x-1/2`}
-          ></div>
-
-          <div className="space-y-12 relative pl-8">
-            {milestones.map((item, index) => (
+            return (
               <motion.div
                 key={item.id}
-                className="relative"
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="relative flex md:items-center flex-col md:flex-row"
+                variants={isLeft ? itemVariants.left : itemVariants.right}
               >
                 <div
-                  className={`absolute -left-[22px] top-1 h-5 w-5 rounded-full ${item.type === 'Work' ? dotColorWork : dotColorEdu} border-4 ${dotBorder} bg-white dark:bg-navy-deep`}
+                  className={`absolute top-0 left-1/2 w-6 h-6 rounded-full ${dotBg} ring-4 ${
+                    item.type === 'Work' ? dotRingWork : dotRingEdu
+                  } -translate-x-1/2 md:translate-y-1/2 hidden md:block`}
                 ></div>
-                <div className={`p-4 rounded shadow-lg ${cardBg} ${cardText}`}>
-                  <h3 className="font-montserrat font-bold text-md mb-1">
+                <div
+                  className={`absolute top-1 left-0 w-3 h-3 rounded-full ${
+                    item.type === 'Work' ? dotColorWork : dotColorEdu
+                  } block md:hidden`}
+                ></div>
+
+                <div
+                  className={`w-full md:w-[calc(50%-2rem)] p-5 rounded-lg shadow-xl ${cardBg} ${cardText} ${
+                    isLeft ? 'md:mr-auto' : 'md:ml-auto'
+                  } ${
+                    isLeft
+                      ? `md:${cardBorder} ${borderColorClass}`
+                      : `md:border-l-4 ${borderColorClass}`
+                  } ml-6 md:ml-0 border-l-4 md:border-l-0 ${borderColorClass}`}
+                >
+                  <p className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-1">
+                    {item.date || item.type}
+                  </p>
+                  <h3 className="font-montserrat font-bold text-lg mb-2">
                     {item.title}
                   </h3>
-                  <p className="font-inter text-xs italic mb-2">
-                    ({item.type})
-                  </p>
-                  <p className="font-inter text-xs">{item.description}</p>
+                  <p className="font-inter text-sm">{item.description}</p>
                 </div>
               </motion.div>
-            ))}
-          </div>
-        </div>
+            );
+          })}
+        </motion.div>
       </div>
     </section>
   );
