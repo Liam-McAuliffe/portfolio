@@ -1,4 +1,5 @@
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import Image from 'next/image';
 
 export default function Footer() {
   const footerBg = 'bg-charcoal dark:bg-navy-deep';
@@ -9,7 +10,7 @@ export default function Footer() {
 
   return (
     <footer className={`py-6 px-8 ${footerBg} ${textColor} ${sidebarPadding}`}>
-      <div className="ml-4 flex flex-col md:flex-row justify-between items-center text-sm">
+      <div className="ml-4 flex flex-col md:flex-row justify-between items-end text-sm">
         <div className="flex gap-6 mb-4 md:mb-0">
           <a
             href="https://github.com/Liam-McAuliffe/"
@@ -30,9 +31,15 @@ export default function Footer() {
             <FaLinkedin size={24} />
           </a>
         </div>
-        <div className="font-inter">
+        <div className="font-inter  ">
           © {new Date().getFullYear()} Liam McAuliffe
         </div>
+        <Image
+          src="/liam-desk.webp"
+          alt="Footer Image"
+          width={100}
+          height={100}
+        />
       </div>
     </footer>
   );

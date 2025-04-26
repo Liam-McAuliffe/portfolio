@@ -1,7 +1,10 @@
 'use client';
 
+// Import React hooks
 import { useState, useRef } from 'react';
-import { FaGithub, FaLinkedin, FaDownload } from 'react-icons/fa';
+// Import icons
+import { FaGithub, FaLinkedin, FaDownload, FaVolumeUp } from 'react-icons/fa'; // Added FaVolumeUp
+// Page section components
 import AboutMe from '@/components/AboutMe';
 import Experience from '@/components/Experience';
 import Skills from '@/components/Skills';
@@ -10,11 +13,13 @@ import Community from '@/components/Community';
 import ContactForm from '@/components/ContactForm';
 import ThemeToggleButton from '@/components/ThemeToggleButton';
 import HeroAnimation from '@/components/HeroAnimation';
+import PixelRunner from '@/components/PixelRunner'; // < Import PixelRunner
 
+// Main component for the homepage
 export default function Home() {
+  // . (existing state, data, functions) ...
   const [activeSkillFilter, setActiveSkillFilter] = useState('All');
   const audioRef = useRef(null);
-
   const allProjects = [
     {
       id: 1,
@@ -83,18 +88,27 @@ export default function Home() {
       repoUrl: 'https://github.com/Liam-McAuliffe/to-do-list',
     },
   ];
-
   const handleSkillFilterChange = (skill) => {
     setActiveSkillFilter(skill);
   };
-
   const filteredProjects =
     activeSkillFilter === 'All'
       ? allProjects
       : allProjects.filter((project) =>
           project.tech.includes(activeSkillFilter)
         );
+  const playNamePronunciation = () => {
+    if (typeof window !== 'undefined') {
+      if (!audioRef.current) {
+        audioRef.current = new Audio('/name-pronunciation.mp3');
+      }
+      audioRef.current.play().catch((error) => {
+        console.error('Error playing audio:', error);
+      });
+    }
+  };
 
+  // . (button/link style variables) ...
   const primaryButtonBg = 'bg-teal dark:bg-teal';
   const primaryButtonText = 'text-navy-deep dark:text-navy-deep';
   const secondaryButtonBg = 'bg-transparent';
@@ -109,25 +123,23 @@ export default function Home() {
   const nameButtonFocus =
     'focus:ring-2 focus:ring-offset-2 focus:ring-offset-navy-deep dark:focus:ring-offset-charcoal focus:ring-teal';
 
-  const playNamePronunciation = () => {
-    if (typeof window !== 'undefined') {
-      if (!audioRef.current) {
-        audioRef.current = new Audio('/name-pronunciation.mp3');
-      }
-      audioRef.current.play().catch((error) => {
-        console.error('Error playing audio:', error);
-      });
-    }
-  };
-
   return (
     <>
+      {/* Theme toggle remains the same */}
       <div className="hidden md:block fixed top-6 right-8 z-50">
         <ThemeToggleButton />
       </div>
 
-      <section id="hero" className="flex flex-col md:flex-row lg:min-h-screen">
-        <div className="flex w-full md:w-1/2 flex-col justify-center bg-navy-deep dark:bg-charcoal p-6 sm:p-8 md:p-12 text-grey-soft dark:text-grey-soft">
+      {/* Make the hero section relative to position PixelRunner inside it */}
+      <section
+        id="hero"
+        className="relative flex flex-col md:flex-row lg:min-h-screen overflow-hidden"
+      >
+        {' '}
+        {/* Add relative and overflow-hidden */}
+        {/* Column 1: Text Content */}
+        <div className="flex flex-col justify-center flex-1 w-full md:w-1/2 bg-navy-deep dark:bg-charcoal p-6 sm:p-8 md:p-12 text-grey-soft dark:text-grey-soft">
+          {/* Keep existing h1, p, buttons, social links here... */}
           <h1 className="text-grey-soft dark:text-grey-soft font-montserrat text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
             👋 Hi, I’m
             <button
@@ -136,7 +148,7 @@ export default function Home() {
               title="Hear pronunciation"
               className={`${nameButtonBase} ${nameButtonHover} ${nameButtonFocus} inline-flex items-center m-2 p-1 gap-2`}
             >
-              Liam McAuliffe 🔊
+              Liam McAuliffe <FaVolumeUp size={20} />
             </button>
           </h1>
 
@@ -145,6 +157,7 @@ export default function Home() {
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-4">
+            {/* ... buttons ... */}
             <a
               href="#projects"
               className={`inline-block rounded ${primaryButtonBg} ${primaryButtonText} px-6 py-3 font-montserrat text-sm sm:text-base font-bold transition hover:scale-[1.03] ${nameButtonFocus}`}
@@ -161,6 +174,7 @@ export default function Home() {
           </div>
 
           <div className="mt-6 flex items-center gap-5">
+            {/* ... social links ... */}
             <a
               href="https://github.com/Liam-McAuliffe/"
               target="_blank"
@@ -180,15 +194,21 @@ export default function Home() {
               <FaLinkedin size={28} />
             </a>
           </div>
+          {/* REMOVE PixelRunner from here */}
         </div>
-
-        <div className="w-full md:w-1/2 bg-charcoal dark:bg-navy-deep flex items-center justify-center p-0 overflow-hidden">
+        {/* Column 2: Hero Animation */}
+        <div className="w-full md:w-1/2 bg-charcoal dark:bg-navy-deep flex items-center justify-center p-0 md:relative">
+          {' '}
+          {/* Add md:relative */}
           <div className="w-full h-64 sm:h-80 md:h-full aspect-square md:aspect-auto">
             <HeroAnimation />
           </div>
         </div>
+        {/* ADD PixelRunner HERE, positioned absolutely within the hero section */}
+        <PixelRunner />
       </section>
 
+      {/* Rest of the page sections (AboutMe, Skills, etc.) */}
       <AboutMe />
       <Skills
         activeFilter={activeSkillFilter}

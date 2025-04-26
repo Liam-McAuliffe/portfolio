@@ -1,9 +1,15 @@
-import Image from 'next/image';
+'use client';
+
 import { motion } from 'framer-motion';
+// Removed Image import, added FlippingAvatar
+import FlippingAvatar from './FlippingAvatar'; // Import the new component
+// Import icons for tech stack
 import { FaReact } from 'react-icons/fa';
 import { SiNextdotjs, SiTailwindcss } from 'react-icons/si';
+// Removed LiamJrModel import from here
 
 export default function AboutMe() {
+  // Animation variants remain the same
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -11,17 +17,14 @@ export default function AboutMe() {
       transition: { staggerChildren: 0.2, delayChildren: 0.1 },
     },
   };
-
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
   };
+  // Removed imageVariants, using containerVariants for the whole avatar section now
+  // const imageVariants = { ... };
 
-  const imageVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: { opacity: 1, scale: 1, transition: { duration: 0.5 } },
-  };
-
+  // Styles remain the same
   const headingColor = 'text-navy-deep dark:text-teal';
   const iconColor = 'text-coral dark:text-teal';
 
@@ -35,28 +38,20 @@ export default function AboutMe() {
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.3 }}
+        viewport={{ once: true, amount: 0.2 }} // Adjust amount if needed
       >
+        {/* --- Replace Image div with FlippingAvatar --- */}
         <motion.div
           className="w-full md:w-1/3 flex justify-center"
-          variants={imageVariants}
+          // Apply itemVariants for staggered entrance of the whole avatar
+          variants={itemVariants}
         >
-          <motion.div
-            className="relative h-64 w-64 rounded-full overflow-hidden shadow-lg border-4 border-teal dark:border-teal transition-transform duration-300 ease-out"
-            whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
-          >
-            <Image
-              src="/headshot.webp"
-              alt="Liam McAuliffe headshot"
-              fill
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              style={{ objectFit: 'cover' }}
-              priority
-            />
-          </motion.div>
+          <FlippingAvatar />
         </motion.div>
+        {/* --- --- */}
 
-        <motion.div className="w-full md:w-2/3" variants={containerVariants}>
+        {/* Text Content (remains the same, uses itemVariants for stagger) */}
+        <motion.div className="w-full md:w-2/3" variants={itemVariants}>
           <motion.h2
             className={`font-montserrat text-3xl font-bold mb-6 ${headingColor}`}
             variants={itemVariants}

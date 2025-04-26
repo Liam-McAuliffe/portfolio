@@ -24,6 +24,26 @@ html {
   scroll-behavior: smooth;
 }
 
+@keyframes run-cycle {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -128px 0;
+  }
+}
+
+.pixel-runner {
+  width: 32px;
+  height: 32px;
+  background-image: url('/pixel-run.png');
+  background-repeat: no-repeat;
+  animation: run-cycle 0.5s steps(4) infinite;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
 @layer utilities {
   @keyframes marquee {
     0% {

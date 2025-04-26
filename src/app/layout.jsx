@@ -24,6 +24,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${inter.variable} ${montserrat.variable}`}>
+      <link rel="icon" href="/liam-desk.ico" sizes="any" />
       <body>
         <ThemeProvider>
           <div className="flex flex-col min-h-screen">
